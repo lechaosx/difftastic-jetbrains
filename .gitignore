@@ -1,0 +1,13 @@
+.gradle/
+.kotlin/
+build/
+.intellijPlatform/
+gradlew
+gradlew.bat
+gradle/
+*.iml
+*.iws
+*.ipr
+.idea/
+out/
+.direnv

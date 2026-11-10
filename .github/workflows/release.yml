@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Plugin zip
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+      - uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.nix', 'flake.lock') }}
+          save: false
+      - uses: gradle/actions/setup-gradle@v6
+      - run: nix develop --command gradle --no-daemon buildPlugin -PpluginVersion="${GITHUB_REF_NAME#v}"
+      - run: awk -v v="${GITHUB_REF_NAME#v}" '$0 ~ "^## \\[" v "\\]" {found=1; next} found && /^## \[/ {exit} found' CHANGELOG.md > "$RUNNER_TEMP/notes.md"
+      - uses: softprops/action-gh-release@v3
+        with:
+          files: build/distributions/difftastic-jetbrains-*.zip
+          body_path: ${{ runner.temp }}/notes.md
+          prerelease: ${{ contains(github.ref_name, '-') }}

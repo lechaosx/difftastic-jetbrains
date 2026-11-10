@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build plugin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+      - uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.nix', 'flake.lock') }}
+          save: ${{ github.ref == 'refs/heads/main' }}
+      - uses: gradle/actions/setup-gradle@v6
+      - run: nix develop --command gradle --no-daemon buildPlugin
+      - uses: actions/upload-artifact@v7
+        with:
+          name: difftastic-jetbrains
+          path: build/distributions/*.zip

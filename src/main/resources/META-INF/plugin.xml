@@ -1,0 +1,22 @@
+<idea-plugin>
+    <id>io.github.lechaosx.difftastic</id>
+    <name>Difftastic</name>
+    <vendor url="https://github.com/lechaosx">Drahomír Dlabaja</vendor>
+    <description>Semantic diffs using difftastic</description>
+
+    <idea-version since-build="253"/>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <diff.DiffTool
+                implementation="io.github.lechaosx.difftastic.DifftasticDiffTool"/>
+        <applicationService
+                serviceImplementation="io.github.lechaosx.difftastic.DifftasticSettings"/>
+        <applicationConfigurable
+                parentId="tools"
+                instance="io.github.lechaosx.difftastic.DifftasticSettingsConfigurable"
+                id="io.github.lechaosx.difftastic.DifftasticSettingsConfigurable"
+                displayName="Difftastic"/>
+    </extensions>
+</idea-plugin>
