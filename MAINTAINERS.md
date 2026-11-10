@@ -48,6 +48,8 @@ Workflows live in `.github/workflows/` and run Gradle inside `nix develop`.
 - **`ci.yml`** (pushes to `main`, pull requests) — runs `buildPlugin` and uploads the zip as an artifact.
 - **`release.yml`** (tags `v*`) — builds with `pluginVersion` set from the tag (strip `v` prefix)
   and creates a GitHub Release with the zip, using the tag's `CHANGELOG.md` section as notes.
+  Tags without a `-` are then published to JetBrains Marketplace with the
+  `JETBRAINS_MARKETPLACE_TOKEN` repository secret.
 
 ## Releasing
 
@@ -55,7 +57,7 @@ Workflows live in `.github/workflows/` and run Gradle inside `nix develop`.
 2. Commit: `git commit -am "Release vX.Y.Z"`
 3. Tag: `git tag vX.Y.Z && git push origin vX.Y.Z`
 
-`release.yml` handles the rest: build → GitHub Release with the zip attached.
+`release.yml` handles the rest: build → GitHub Release with the zip attached → Marketplace.
 
 ## IntelliJ Platform SDK
 

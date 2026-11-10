@@ -22,3 +22,9 @@ dependencies {
         intellijIdea("2025.3.5")
     }
 }
+
+intellijPlatform {
+    publishing {
+        token = providers.environmentVariable("PUBLISH_TOKEN")
+    }
+}

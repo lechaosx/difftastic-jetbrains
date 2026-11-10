@@ -26,3 +26,7 @@ jobs:
           files: build/distributions/difftastic-jetbrains-*.zip
           body_path: ${{ runner.temp }}/notes.md
           prerelease: ${{ contains(github.ref_name, '-') }}
+      - if: ${{ !contains(github.ref_name, '-') }}
+        run: nix develop --command gradle --no-daemon publishPlugin -PpluginVersion="${GITHUB_REF_NAME#v}"
+        env:
+          PUBLISH_TOKEN: ${{ secrets.JETBRAINS_MARKETPLACE_TOKEN }}
