@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-10
+
 ### Added
 - **Difftastic** option in the diff tool selector alongside the standard Side-by-side and Unified viewers
 - Semantic, AST-based diff powered by [difftastic](https://github.com/Wilfred/difftastic)
