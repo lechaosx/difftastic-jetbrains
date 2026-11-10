@@ -17,7 +17,7 @@ class DifftasticSettingsConfigurable : BoundConfigurable("Difftastic") {
         }
         row {
             textFieldWithBrowseButton(
-                FileChooserDescriptorFactory.createSingleFileDescriptor()
+                FileChooserDescriptorFactory.singleFile()
                     .withTitle("Select difft Executable")
             )
                 .bindText(settings::difftasticPath)
