@@ -2,7 +2,15 @@
     <id>io.github.lechaosx.difftastic</id>
     <name>Difftastic</name>
     <vendor url="https://github.com/lechaosx">Drahomír Dlabaja</vendor>
-    <description>Semantic diffs using difftastic</description>
+    <description><![CDATA[
+<p>Semantic diffs powered by <a href="https://github.com/Wilfred/difftastic">difftastic</a>.
+Instead of comparing lines, difftastic parses both files as syntax trees and highlights
+only what actually changed, ignoring formatting and other non-semantic noise.</p>
+<p>Adds a <b>Difftastic</b> viewer to the diff tool selector, next to Side-by-side and Unified.
+Toolbar toggles limit highlights to identifiers, keywords, types, strings, comments or delimiters.</p>
+<p>Requires the <code>difft</code> binary on <code>$PATH</code>, or configured under
+<b>Settings | Tools | Difftastic</b>.</p>
+]]></description>
 
     <idea-version since-build="253"/>
 
