@@ -53,7 +53,8 @@ Workflows live in `.github/workflows/` and run Gradle inside `nix develop`.
 
 ## Releasing
 
-1. Update `CHANGELOG.md` — add a `## [X.Y.Z] - YYYY-MM-DD` section under `[Unreleased]`
+1. Update `CHANGELOG.md` — add a `## [X.Y.Z] - YYYY-MM-DD` section under `[Unreleased]`.
+   The build renders this section into the plugin's change notes, shown as What's New on Marketplace.
 2. Commit: `git commit -am "Release vX.Y.Z"`
 3. Tag: `git tag vX.Y.Z && git push origin vX.Y.Z`
 

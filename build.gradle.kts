@@ -1,6 +1,9 @@
+import org.jetbrains.changelog.Changelog
+
 plugins {
     id("org.jetbrains.kotlin.jvm") version "2.2.0"
     id("org.jetbrains.intellij.platform") version "2.16.0"
+    id("org.jetbrains.changelog") version "2.5.0"
 }
 
 group = "io.github.lechaosx"
@@ -24,6 +27,12 @@ dependencies {
 }
 
 intellijPlatform {
+    pluginConfiguration {
+        changeNotes = provider {
+            val item = changelog.getOrNull(project.version.toString()) ?: changelog.getUnreleased()
+            changelog.renderItem(item.withHeader(false).withEmptySections(false), Changelog.OutputType.HTML)
+        }
+    }
     publishing {
         token = providers.environmentVariable("PUBLISH_TOKEN")
     }
